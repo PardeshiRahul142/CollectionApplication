@@ -15,8 +15,6 @@ public class ArrayListApp
 	{
 		Object obj=i.next();
 		System.out.println(obj);
+	}	
 	}
-			
-	}
-
 }

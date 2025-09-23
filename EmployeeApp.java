@@ -1,54 +1,84 @@
-/*Q2. Employee Salary Analysis using Vector
+/*Q2. Vector - Employee Management
 
-Problem:
-Create an Employee POJO class with attributes: empId, empName, salary.
+Create a Vector<Employee> where Employee has (id, name, salary).
 
-Store employee objects inside a Vector<Employee>.
+Insert employees.
 
-Implement a generic method to find the employee with the highest salary.
+Display in ascending order of salary.
 
-Print all employees whose salary is above 50,000.
+Search an employee by name.
 
-Explanation:
-This helps in learning Vector<Employee> with POJO and using generics for comparison.
-*/
+Delete employee at given position.*/
 
 import java.util.*;
-class Employee
+import java.lang.Comparable;
+class Employee implements Comparable<Employee>
 {
-    private int empId;
-    private String empName;
-    private double salary;
-
-   public Employee(int id ,String name ,double salary)
+   private int id;
+   private String name;
+   private double salary;
+  
+   Employee(int id ,String name ,double salary)
    {
-        this.empId=id;
-        this.empName=name;
-        this.salary=salary;
+    this.id=id;
+    this.name=name;
+    this.salary=salary;
    }
-   public int getId() {return empId;}  
-   public String getName(){return empName;}
+   public int getId(){return id;}
+   public String getName(){return name;}
    public double getSalary(){return salary;}
-}//class
-
-public class EmployeeApp
-{   public static void main(String args[])
-    {
-      List<Employee> al=new ArrayList<>();
-      al.add(new Employee(1,"Rahul",51000));
-      al.add(new Employee(2,"Rohan",39999)); 
-      al.add(new Employee(3,"Yuvraj",80000));
-      al.add(new Employee(4,"Avd",58333)); 
-      al.add(new Employee(5,"Parsad",19000));
-
-     for(Employee emp:al)
-     {
-       if(emp.getSalary()> 50000)
-       {
-          System.out.println("empId :"+emp.getId()+" "+"empName :"+emp.getName()+" "+"salary :"+emp.getSalary());
-       }
-     }
-     
  
+   public void setId(int id){this.id=id;}
+   public void setName(String name){this.name=name;}
+   public void setSalary(int salary){this.salary=salary;}
+
+    public int compareTo(Employee emp) {
+    return Double.compare(this.salary, emp.salary);
     }
 }//class
+public class EmployeeApp
+{ public static void main(String args[])
+  {
+    Scanner sc=new Scanner(System.in);
+    List<Employee> v=new Vector<>();
+    
+    v.add(new Employee(1,"Rahul",90000.90));
+    v.add(new Employee(2,"Shantanu",32103.20));
+    v.add(new Employee(3,"Shree",45999.32));
+    v.add(new Employee(4,"Shaurya",98000.12));
+    v.add(new Employee(5,"Shiv",654549.540));
+     
+    Collections.sort(v);
+    for(Employee emp:v)
+    {
+      System.out.println(" id is :"+emp.getId() +" | "+" Name is :"+emp.getName() +" | "+" Salary is :"+emp.getSalary());
+    }
+    System.out.println("--------------------------------------------------------------------------------------------");
+    System.out.println("Enter the student name for searching :");
+    String name=sc.nextLine();
+    int flag=0;
+    for(Employee emp:v)
+    {
+     if(emp.getName().equalsIgnoreCase(name))
+     { System.out.println("Is found ");
+        flag=1;
+         break;
+     }
+    }
+    if(flag==0)
+    { System.out.println("Not Found...");
+    }
+    System.out.println("--------------------------------------------------------------------------------------------");
+    System.out.println("Enter index where elements is delete :");
+    int pos=sc.nextInt();
+    if(pos>=0 && pos<v.size()-1)
+    { Employee remove=v.remove(pos);
+      System.out.println("Remove element Sucessfull");
+    }
+    else
+    {  System.out.println("Invalid index...");
+    }
+
+   
+   }//main
+}//c;ass

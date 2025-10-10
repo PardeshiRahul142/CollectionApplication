@@ -8,6 +8,12 @@ public class FrequencyOf
      int a[]={10,20,30,40,10,20,30,40,50};
 
      HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
+
+     List<Integer> al=new ArrayList<Integer>();
+          al.add(10);
+          al.add(20);
+          al.add(30);
+          al.add(10);
      for(int val : a)
      {  Integer count=map.get(val);
        
